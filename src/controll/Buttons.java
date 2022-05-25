@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.rmi.RemoteException;
 
 import lejos.hardware.Sound;
+import testy.Box;
 import testy.MakeCsv;
 import windows.UserPanel;
 
@@ -11,13 +12,13 @@ public class Buttons {
 
 	public static int speed1 = 100;
 	public static int time1 = 1850;
-	public static float distanceFront, distanceLeft;
+	public static float distanceFront, distanceLeft, distanceRight;
 	
 	public static void btn_test() {
 		
 		try {
 			UserPanel.editor.setText("TEST!");
-			UserPanel.editor.setBackground(Color.green);
+			UserPanel.editor.setBackground(Color.green);			
 
 		} catch (Exception r) {
 			r.printStackTrace();
@@ -25,6 +26,20 @@ public class Buttons {
 			UserPanel.editor.setBackground(Color.red);
 		}
 	}
+	
+	public static void btn_test2(){
+		
+		try {
+			Box.readList();
+			UserPanel.editor.setText("readlist!");
+			UserPanel.editor.setBackground(Color.green);			
+
+		} catch (Exception r) {
+			r.printStackTrace();
+			UserPanel.editor.setText("Operacja wykonana niepomyœlnie!");
+			UserPanel.editor.setBackground(Color.red);
+		}
+	} 
 	
 	public static void btn_backward() {
 		
@@ -96,11 +111,14 @@ public class Buttons {
 				
 				System.out.println("Sensory:");
 				distanceFront = Sensors.getDistance_UltrasonicSensor("portS1");
-				distanceLeft = Sensors.getDistance_UltrasonicSensor("portS2");		
-				System.out.println(distanceFront);			
-				System.out.println(distanceLeft);
+				distanceLeft = Sensors.getDistance_UltrasonicSensor("portS3");	
+				distanceRight = Sensors.getDistance_UltrasonicSensor("portS2");
+				System.out.println("Przód: "+distanceFront);			
+				System.out.println("Prawa: "+distanceLeft);
+				System.out.println("Lewa: "+distanceRight);
 				MakeCsv.frontSensor=String.valueOf(distanceFront);
-				MakeCsv.leftSensor=String.valueOf(distanceLeft);		
+				MakeCsv.leftSensor=String.valueOf(distanceLeft);	
+				MakeCsv.rightSensor=String.valueOf(distanceRight);	
 				System.out.println("Ruch do przodu");
 				System.out.println("Motor A: " + speed1);
 				MakeCsv.speedA=String.valueOf(speed1);

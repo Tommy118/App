@@ -10,7 +10,7 @@ import controll.Buttons;
 import controll.Sensors;
 import windows.UserPanel;
 
-public class Box extends Rectangle{
+public class Box2 extends Rectangle{
 	
 	static int CurrentX, CurrentY, SensorX, SensorY, ValueOfUltrasonic, SensorValue;
 	
@@ -144,7 +144,7 @@ public class Box extends Rectangle{
 	boolean operation = true;
 	
 	
-	Box(int x, int y, int width, int height, Color color){
+	Box2(int x, int y, int width, int height, Color color){
 		this.x=x;
 		this.y=y;
 		this.width=width;
@@ -366,11 +366,4 @@ public class Box extends Rectangle{
 		g.fillRect(this.x, this.y, this.width, this.height);
 	}
 
-	public void draw2(Graphics g) {
-		g.setColor(this.color);
-		g.fillRect(this.x, this.y, this.width, this.height);
-		g.setColor(Color.BLACK);
-		g.drawRect(this.x, this.y, this.width, 0);
-	}
-	
 }

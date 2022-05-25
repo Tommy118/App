@@ -23,7 +23,7 @@ import javax.swing.JTabbedPane;
 
 import controll.BasicControll;
 import controll.Buttons;
-//import net.miginfocom.swing.MigLayout;
+import net.miginfocom.swing.MigLayout;
 import testy.PanelMapy;
 import javax.swing.ScrollPaneConstants;
 import java.awt.Panel;
@@ -31,6 +31,7 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 import java.awt.Font;
+
 
 public class UserPanel {	
 	
@@ -47,13 +48,15 @@ public class UserPanel {
     public static JFormattedTextField textField_SensorLeft_1  = new JFormattedTextField();
     public static JFormattedTextField textField_SensorRight_1  = new JFormattedTextField();
     public static JFormattedTextField textField_SensorGyro_1  = new JFormattedTextField();
-	
+    public static JLabel imgRobot = new JLabel(new ImageIcon("src\\icons\\robot2.png"));
+    
 			public static void main(String[] args) throws IOException {
 				
-				JFrame frame = new JFrame("Map Maker");
+				JFrame frame = new JFrame("Map Maker");				
 		        JPanel Zak³adkaXbox = new JPanel();
 		        JPanel Zak³adkaPrzyciski = new JPanel();
 				JPanel Zak³adkaMapa = new JPanel();
+				Zak³adkaMapa.add(new PanelMapy());
 				FlowLayout flowLayout = (FlowLayout) Zak³adkaMapa.getLayout();
 				flowLayout.setAlignment(FlowLayout.LEADING);
 				JPanel Mapa = new JPanel();
@@ -75,6 +78,7 @@ public class UserPanel {
 				frame.setSize(1920, 1040);
 				frame.setPreferredSize(new Dimension(1920, 1040));
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);	  
 				frame.getContentPane().add(editor, BorderLayout.SOUTH);
 				Container contentPane = frame.getContentPane();
@@ -195,6 +199,16 @@ public class UserPanel {
 						Buttons.btn_test();
 					}
 				});
+				
+		        //btn_test
+				JButton btn_test2 = new JButton(arrowUpDown);
+
+		        btn_test2.setToolTipText("btn_test2");
+		        btn_test2.addActionListener(new ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent e) {
+						Buttons.btn_test2();
+					}
+				});
 
 		        
 				PrzyciskiLevel4.add(btn_forward);
@@ -231,7 +245,7 @@ public class UserPanel {
 				Panel panel = new Panel();
 				panel.setPreferredSize(new Dimension(1890, 940));
 				Mapa.add(panel);
-				//panel.setLayout(new MigLayout("", "[1450.00px][200.00,grow]", "[20px,grow][900px,grow][900px,grow]"));
+				panel.setLayout(new MigLayout("", "[1450.00px][200.00,grow]", "[20px,grow][900px,grow][900px,grow]"));
 				
 
 				
@@ -259,17 +273,29 @@ public class UserPanel {
 				lblNewLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 				panel_label2.add(lblNewLabel2);
 				
-				JScrollPane panel_mapy = new JScrollPane();
-
+				JPanel mapa = new JPanel();
+				mapa.setSize(new Dimension(1500, 1000));
+				mapa.add(new PanelMapy());
+				
+				JScrollPane panel_mapy = new JScrollPane(mapa);
 				
 				panel_mapy.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
 				panel_mapy.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 				panel_mapy.setPreferredSize(new Dimension(1500, 900));
 				panel_mapy.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 				panel.add(panel_mapy, "cell 0 1 1 2,grow");
+			//	imgRobot.setBounds(750,750,10,10);
+			//	mapa.add(imgRobot);
 				
-
-				panel_mapy.add(new PanelMapy());
+				
+				
+				
+				
+				
+				
+				
+				
+				
 
 				
 				JPanel panel_sterowania = new JPanel();
@@ -307,10 +333,12 @@ public class UserPanel {
 				panel_lvl5.add(btn_horn_1);
 				btn_horn_1.setToolTipText("Klakson");
 				
+				//btn_test
+				panel_lvl5.add(btn_test2);
+				
 				JButton btn_close_1 = new JButton(close);
 				btn_close_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 				panel_lvl5.add(btn_close_1);
-				
 				btn_close_1.setToolTipText("Zamkniêcie portów");
 				
 				btn_close_1.addActionListener(new ActionListener() {
@@ -336,13 +364,13 @@ public class UserPanel {
 				panel_lvl1.setPreferredSize(new Dimension(440, 120));
 				panel_danych.add(panel_lvl1);
 				
-				JLabel lblSensorLeft_1 = new JLabel("Dystans strona lewa: ");
-				panel_lvl1.add(lblSensorLeft_1);
-				lblSensorLeft_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+				JLabel lblSensorRight_1 = new JLabel("Dystans strona prawa: ");
+				panel_lvl1.add(lblSensorRight_1);
+				lblSensorRight_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 				
-				textField_SensorLeft_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				panel_lvl1.add(textField_SensorLeft_1);
-				textField_SensorLeft_1.setColumns(15);
+				textField_SensorRight_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+				panel_lvl1.add(textField_SensorRight_1);
+				textField_SensorRight_1.setColumns(15);
 				
 				JLabel lblSensorFront_1 = new JLabel("Dsystans prz\u00F3d: ");
 				panel_lvl1.add(lblSensorFront_1);
@@ -352,13 +380,13 @@ public class UserPanel {
 				panel_lvl1.add(textField_SensorFront_1);
 				textField_SensorFront_1.setColumns(15);
 				
-				JLabel lblSensorRight_1 = new JLabel("Dsystans strona prawa: ");
-				panel_lvl1.add(lblSensorRight_1);
-				lblSensorRight_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+				JLabel lblSensorLeft_1 = new JLabel("Dsystans strona lewa: ");
+				panel_lvl1.add(lblSensorLeft_1);
+				lblSensorLeft_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 				
-				textField_SensorRight_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				panel_lvl1.add(textField_SensorRight_1);
-				textField_SensorRight_1.setColumns(15);
+				textField_SensorLeft_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+				panel_lvl1.add(textField_SensorLeft_1);
+				textField_SensorLeft_1.setColumns(15);
 				
 				JPanel panel_lvl2 = new JPanel();
 				panel_lvl2.setPreferredSize(new Dimension(440, 100));

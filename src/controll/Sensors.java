@@ -9,8 +9,8 @@ import windows.UserPanel;
 public class Sensors {
 	
 
-	private static float realityValue(float value, int range) {
-		return value * range;
+	private static int realityValue(float value, int range) {
+		return (int) (value * range);
 	}
 	
 	static EV3GyroSensor chooseGyroSensor(String port) {
@@ -47,8 +47,8 @@ public class Sensors {
 		case "portS2":
 			return Setup.Robot_sensor2;
 			
-		//case "portFS3":
-			//return Front_sensor3;
+		case "portS3":
+			return Setup.Robot_sensor3;
 		}
 		return null;
 	}
@@ -66,10 +66,15 @@ public class Sensors {
 		do{		
 			if(!BasicControll.closed) {
 				try {
-					UserPanel.textField_SensorFront.setValue(getDistance_UltrasonicSensor("portS1") + "cm");
-					UserPanel.textField_SensorLeft.setValue(getDistance_UltrasonicSensor("portS2") + "cm");
 					UserPanel.textField_SensorFront_1.setValue(getDistance_UltrasonicSensor("portS1") + "cm");
 					UserPanel.textField_SensorLeft_1.setValue(getDistance_UltrasonicSensor("portS2") + "cm");
+					UserPanel.textField_SensorRight_1.setValue(getDistance_UltrasonicSensor("portS3") + "cm");
+					
+					UserPanel.textField_SensorFront.setValue(getDistance_UltrasonicSensor("portS1") + "cm");
+					UserPanel.textField_SensorLeft.setValue(getDistance_UltrasonicSensor("portS2") + "cm");
+					UserPanel.textField_SensorRight.setValue(getDistance_UltrasonicSensor("portS3") + "cm");
+
+
 					//textField_SensorRight.setValue(getDistance_IRSensor("portS3") + "cm");
 					//textField_SensorGyro.setValue(getAngle_GyroSensor8("portS4") + "°");
 					//textField_SensorGyro.setValue(getAngleMode() + "°");

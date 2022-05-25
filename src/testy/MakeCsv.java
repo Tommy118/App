@@ -22,7 +22,7 @@ import com.opencsv.CSVWriter;
 
 
 public class MakeCsv {
-	public static String nazwaPliku, speedA, speedB, leftSensor, frontSensor;
+	public static String nazwaPliku, speedA, speedB, leftSensor, frontSensor, rightSensor;
 
 	
 	public static void sleep() {
@@ -52,7 +52,7 @@ public class MakeCsv {
 			// create CSVWriter object filewriter object as parameter
 			CSVWriter csvWriter = new CSVWriter(outputfile);
 			// adding header to csv
-			String[] header = { "\"Motor A\"", "Motor B", "Left Ultrasonic", "Front Ultrasonic" };
+			String[] header = { "\"Motor A\"", "Motor B", "Left Ultrasonic", "Front Ultrasonic", "Right Ultrasonic" };
 			csvWriter.writeNext(header);
 			csvWriter.close();
 		}
@@ -103,6 +103,7 @@ public class MakeCsv {
 		});
 		
 		frameCSV.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameCSV.setLocationRelativeTo(null);
 		frameCSV.setVisible(true);
 		
 		sleep();
@@ -127,7 +128,7 @@ public class MakeCsv {
 
 			// add data to csv 
 
-			String[] data1 = { "\""+speedA+"\"", speedB, leftSensor, frontSensor };
+			String[] data1 = { "\""+speedA+"\"", speedB, leftSensor, frontSensor, rightSensor };
 			writer.writeNext(data1);
 
 			
